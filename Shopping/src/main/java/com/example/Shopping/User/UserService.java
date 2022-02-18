@@ -24,4 +24,8 @@ public class UserService {
 
         //return optUser.orElseGet(UserModel::new);
     }
+
+    public boolean verifyPassword(UserModel p_modelUser, String p_strPassword) {
+        return p_modelUser.getPassword().equals(p_strPassword);
+    }
 }
