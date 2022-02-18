@@ -14,7 +14,7 @@ public class UserModel {
 	private String userFullName;
 	private String password;
 	private String name;
-	private List<AddressItem> address;
+//	private List<AddressItem> address;
 
 	public void setUserID(String p_strUserID){
 		this.userID = p_strUserID;
@@ -64,11 +64,11 @@ public class UserModel {
 		return name;
 	}
 
-	public void setAddress(List<AddressItem> address){
-		this.address = address;
-	}
-
-	public List<AddressItem> getAddress(){
-		return address;
-	}
+//	public void setAddress(List<AddressItem> address){
+//		this.address = address;
+//	}
+//
+//	public List<AddressItem> getAddress(){
+//		return address;
+//	}
 }

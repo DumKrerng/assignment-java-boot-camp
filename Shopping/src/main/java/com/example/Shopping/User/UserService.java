@@ -1,5 +1,6 @@
 package com.example.Shopping.User;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,10 @@ public class UserService {
     @Autowired
     private UserRepository m_userRepository;
 
+    public void setMockUserRepository(UserRepository p_userRepository) {
+        m_userRepository = p_userRepository;
+    }
+
     public UserModel getUserByUsername(String p_strUsername) {
         Optional<UserModel> optUser = m_userRepository.findByUsername(p_strUsername);
 
@@ -25,7 +30,7 @@ public class UserService {
         //return optUser.orElseGet(UserModel::new);
     }
 
-    public boolean verifyPassword(UserModel p_modelUser, String p_strPassword) {
+    public boolean isEqualPassword(@NotNull UserModel p_modelUser, String p_strPassword) {
         return p_modelUser.getPassword().equals(p_strPassword);
     }
 }
