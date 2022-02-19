@@ -27,7 +27,7 @@ class ProductRepositoryTest {
     @DisplayName("ทดสอบการค้นด้วย SearchValue = \"Product\" แล้ว ต้องพบข้อมูล Product 1 ตัว")
     void TestFindByProductCodeOrProductName_01() {
         String strSearchValue = "Product";
-        Optional<List<ProductModel>> result = m_repository.findByProductCodeContainingOrProductNameContaining(strSearchValue, strSearchValue);
+        Optional<List<ProductModel>> result = m_repository.findByProductCodeContainingIgnoreCaseOrProductNameContainingIgnoreCase(strSearchValue, strSearchValue);
         List<ProductModel> lsProducts = result.get();
 
         assertTrue(result.isPresent());
@@ -38,7 +38,7 @@ class ProductRepositoryTest {
     @DisplayName("ทดสอบการค้นด้วย SearchValue = \"Product\" แล้ว ต้องพบข้อมูล Product 2 ตัว")
     void TestFindByProductCodeOrProductName_02() {
         String strSearchValue = "X";
-        Optional<List<ProductModel>> result = m_repository.findByProductCodeContainingOrProductNameContaining(strSearchValue, strSearchValue);
+        Optional<List<ProductModel>> result = m_repository.findByProductCodeContainingIgnoreCaseOrProductNameContainingIgnoreCase(strSearchValue, strSearchValue);
         List<ProductModel> lsProducts = result.get();
 
         assertTrue(result.isPresent());
@@ -49,7 +49,7 @@ class ProductRepositoryTest {
     @DisplayName("ทดสอบการค้นด้วย SearchValue = \"ProductX\" แล้ว ต้องไม่พบข้อมูล")
     void TestFindByProductCodeOrProductName_03() {
         String strSearchValue = "ProductX";
-        Optional<List<ProductModel>> result = m_repository.findByProductCodeContainingOrProductNameContaining(strSearchValue, strSearchValue);
+        Optional<List<ProductModel>> result = m_repository.findByProductCodeContainingIgnoreCaseOrProductNameContainingIgnoreCase(strSearchValue, strSearchValue);
         List<ProductModel> lsProducts = result.get();
 
         assertTrue(result.isPresent());
