@@ -16,6 +16,8 @@ public class BasketModel {
 
 	private String basketStatus;
 
+	public BasketModel() {}
+
 	public void setBasketStatus(String basketStatus){
 		this.basketStatus = basketStatus;
 	}

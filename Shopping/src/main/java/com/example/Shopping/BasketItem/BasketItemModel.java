@@ -1,18 +1,23 @@
 package com.example.Shopping.BasketItem;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class BasketItemModel {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private int basketItemID;
+
 	private String basketID;
 	private String productID;
 	private double unitPrice;
 	private int quantity;
+
+	public BasketItemModel() {}
 
 	public void setUnitPrice(double p_dubUnitPrice){
 		this.unitPrice = p_dubUnitPrice;
