@@ -1,0 +1,6 @@
+{
+  "BasketModel": {
+    "BasketID": "string",
+    "BasketStatus": "string"
+  }
+}
