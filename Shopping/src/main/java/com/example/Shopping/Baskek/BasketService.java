@@ -4,9 +4,12 @@ import com.example.Shopping.BasketItem.BasketItemModel;
 import com.example.Shopping.BasketItem.BasketItemRepository;
 import com.example.Shopping.Product.ProductModel;
 import com.example.Shopping.Product.ProductRepository;
+import com.example.Shopping.utility.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -29,11 +32,12 @@ public class BasketService {
         m_repoBasketItem = p_repBasketItem;
     }
 
+    @Transactional
     public BasketViewModel addProduct(String p_strProductCode) {
         Optional<ProductModel> optProduct = m_repoProduct.findByProductCode(p_strProductCode);
 
         if(!optProduct.isPresent()) {
-            return null;
+            throw new NotFoundException(p_strProductCode);
         }
 
         ProductModel modelProduct = optProduct.get();

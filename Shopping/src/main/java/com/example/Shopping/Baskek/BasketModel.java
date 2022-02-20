@@ -33,4 +33,14 @@ public class BasketModel {
 	public String getBasketID(){
 		return basketID;
 	}
+
+	/*
+	*
+    @Column(name = "last_name")
+    private String lastName;
+
+    @OneToMany
+    private Set<Role> roles;
+	*
+	* */
 }

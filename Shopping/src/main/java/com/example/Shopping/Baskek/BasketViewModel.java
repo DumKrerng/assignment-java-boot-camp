@@ -8,27 +8,31 @@ import java.util.List;
 public class BasketViewModel {
 
     private BasketModel m_basket;
-    private List<BasketItemModel> m_lsBasketItems;
+    private List<BasketItemModel> m_basketItems;
+
+    public BasketViewModel() {
+//        m_basketItems = new ArrayList<>();
+    }
 
     public BasketViewModel(BasketModel p_modelBasket, BasketItemModel p_modelBasketItem) {
         m_basket = p_modelBasket;
-        m_lsBasketItems = new ArrayList<>();
-        m_lsBasketItems.add(p_modelBasketItem);
+        m_basketItems = new ArrayList<>();
+        m_basketItems.add(p_modelBasketItem);
     }
 
     public BasketModel getBasket() {
         return m_basket;
     }
 
-    public void setM_basket(BasketModel p_basket) {
+    public void setBasket(BasketModel p_basket) {
         this.m_basket = p_basket;
     }
 
     public List<BasketItemModel> getBasketItems() {
-        return m_lsBasketItems;
+        return m_basketItems;
     }
 
-    public void setM_lsBasketItems(List<BasketItemModel> p_lsBasketItems) {
-        this.m_lsBasketItems = p_lsBasketItems;
+    public void setBasketItems(List<BasketItemModel> p_lsBasketItems) {
+        this.m_basketItems = p_lsBasketItems;
     }
 }
