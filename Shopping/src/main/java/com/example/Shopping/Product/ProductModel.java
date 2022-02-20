@@ -31,6 +31,10 @@ public class ProductModel {
 		this.productName = p_strProductNameX;
 	}
 
+	public String getProductID(){
+		return productID;
+	}
+
 	public void setUnitDiscount(double p_dubUnitDiscount){
 		this.unitDiscount = p_dubUnitDiscount;
 	}

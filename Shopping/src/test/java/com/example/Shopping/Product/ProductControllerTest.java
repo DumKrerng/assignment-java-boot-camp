@@ -1,9 +1,6 @@
 package com.example.Shopping.Product;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -13,6 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ProductControllerTest {
 
     @Autowired
@@ -21,16 +19,11 @@ class ProductControllerTest {
     @Autowired
     private ProductRepository m_repository;
 
-    @BeforeEach
-    public void initData() {
+    @BeforeAll
+    public void setup() {
         m_repository.save(new ProductModel("ProductCodeX", "ProductNameX"));
         m_repository.save(new ProductModel("CodeX", "NameX"));
         m_repository.save(new ProductModel("เสื้อX", "เสื้อX"));
-    }
-
-    @AfterEach
-    public void clearData() {
-        m_repository.deleteAll();
     }
 
     @Test
