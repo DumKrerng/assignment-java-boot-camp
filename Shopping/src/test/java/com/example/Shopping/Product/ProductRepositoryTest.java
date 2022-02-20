@@ -55,4 +55,22 @@ class ProductRepositoryTest {
         assertTrue(result.isPresent());
         assertEquals(0, lsProducts.size());
     }
+
+    @Test
+    @DisplayName("ทดสอบการค้นด้วย ProductCode = \"CodeX\" แล้ว ต้องพบข้อมูล")
+    void TestFindByProductCode_01() {
+        String strProductCode = "CodeX";
+        Optional<ProductModel> result = m_repository.findByProductCode(strProductCode);
+
+        assertTrue(result.isPresent());
+    }
+
+    @Test
+    @DisplayName("ทดสอบการค้นด้วย ProductCode = \"ProductX\" แล้ว ต้องไม่พบข้อมูล")
+    void TestFindByProductCode_02() {
+        String strProductCode = "ProductX";
+        Optional<ProductModel> result = m_repository.findByProductCode(strProductCode);
+
+        assertFalse(result.isPresent());
+    }
 }
