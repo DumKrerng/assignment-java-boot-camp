@@ -42,11 +42,12 @@ class BasketControllerTest {
                 "{}",
                 ResponseBasket.class);
         BasketViewModel viewmodel = response.getData();
+        BasketModel basket = viewmodel.getBasket();
 
-        assertEquals(1, viewmodel.getBasketItems().size());
+        assertEquals(1, basket.getBasketItems().size());
 
         BasketModel modelBasket = viewmodel.getBasket();
-        BasketItemModel modelBasketItem = viewmodel.getBasketItems().get(0);
+        BasketItemModel modelBasketItem = basket.getBasketItems().get(0);
         String strProductID = modelBasketItem.getProductID();
         ProductModel modelProduct = m_repoProduct.getById(strProductID);
 

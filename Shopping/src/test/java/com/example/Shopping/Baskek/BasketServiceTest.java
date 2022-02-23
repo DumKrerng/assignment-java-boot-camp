@@ -33,10 +33,11 @@ class BasketServiceTest {
     void testAddProduct_01() {
         String strProductCode = "ProductX";
         BasketService service = new BasketService();
-        service.setMockRepository(m_repProduct, m_repBasket, m_repBasketItem);
-        BasketViewModel viewBasket = service.addProduct(strProductCode);
+//        service.setMockRepository(m_repProduct, m_repBasket, m_repBasketItem);
+        service.setMockRepository(m_repProduct, m_repBasket);
+        BasketModel basket = service.addProduct(strProductCode);
 
-        assertEquals(1, viewBasket.getBasketItems().size());
+        assertEquals(1, basket.getBasketItems().size());
     }
 
     @Test
@@ -44,8 +45,9 @@ class BasketServiceTest {
     void testAddProduct_02() {
         String strProductCode = "ProductZ";
         BasketService service = new BasketService();
-        service.setMockRepository(m_repProduct, m_repBasket, m_repBasketItem);
-        BasketViewModel viewBasket = service.addProduct(strProductCode);
+//        service.setMockRepository(m_repProduct, m_repBasket, m_repBasketItem);
+        service.setMockRepository(m_repProduct, m_repBasket);
+        BasketModel viewBasket = service.addProduct(strProductCode);
 
         assertNull(viewBasket);
     }

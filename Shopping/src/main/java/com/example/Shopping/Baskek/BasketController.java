@@ -13,9 +13,9 @@ public class BasketController {
 
     @PostMapping("/api/v1/basket/product/{p_strProductCode}")
     public ResponseBasket addProduct(@PathVariable String p_strProductCode) {
-        BasketViewModel result = m_service.addProduct(p_strProductCode);
+        BasketModel result = m_service.addProduct(p_strProductCode);
         ResponseBasket response = new ResponseBasket();
-        response.setData(result);
+        response.setData(new BasketViewModel(result));
 
         return response;
     }

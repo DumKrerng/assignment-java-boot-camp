@@ -1,10 +1,10 @@
 package com.example.Shopping.Baskek;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.*;
+import com.example.Shopping.BasketItem.*;
+import org.hibernate.annotations.*;
 
 @Entity
 public class BasketModel {
@@ -16,22 +16,40 @@ public class BasketModel {
 
 	private String basketStatus;
 
-	public BasketModel() {}
+	@OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
+//	@OneToMany(mappedBy = "basket", fetch = FetchType.LAZY) //Default
+	private List<BasketItemModel> basketItems;
 
-	public void setBasketStatus(String basketStatus){
-		this.basketStatus = basketStatus;
+	public BasketModel() {
+		this.basketItems = new ArrayList<>();
+	}
+
+	public void setBasketStatus(String p_strBasketStatus){
+		this.basketStatus = p_strBasketStatus;
 	}
 
 	public String getBasketStatus(){
 		return basketStatus;
 	}
 
-	public void setBasketID(String basketID){
-		this.basketID = basketID;
+	public void setBasketID(String p_strBasketID){
+		this.basketID = p_strBasketID;
 	}
 
 	public String getBasketID(){
 		return basketID;
+	}
+
+	public void setBasketItemModels(List<BasketItemModel> p_lsBasketItems) {
+		this.basketItems = p_lsBasketItems;
+	}
+
+	public void addBasketItem(BasketItemModel p_basketItemModel) {
+		this.basketItems.add(p_basketItemModel);
+	}
+
+	public List<BasketItemModel> getBasketItems() {
+		return basketItems;
 	}
 
 	/*

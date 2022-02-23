@@ -1,9 +1,8 @@
 package com.example.Shopping.BasketItem;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import com.example.Shopping.Baskek.*;
+import com.fasterxml.jackson.annotation.*;
 
 @Entity
 public class BasketItemModel {
@@ -12,10 +11,15 @@ public class BasketItemModel {
 	@GeneratedValue
 	private int basketItemID;
 
-	private String basketID;
+//	private String basketID;
 	private String productID;
 	private double unitPrice;
 	private int quantity;
+
+	@ManyToOne
+	@JoinColumn(name = "basketID", nullable = false)
+	@JsonIgnore
+	private BasketModel basket;
 
 	public BasketItemModel() {}
 
@@ -43,13 +47,13 @@ public class BasketItemModel {
 		return productID;
 	}
 
-	public void setBasketID(String p_strBasketID){
-		this.basketID = p_strBasketID;
-	}
-
-	public String getBasketID(){
-		return basketID;
-	}
+//	public void setBasketID(String p_strBasketID){
+//		this.basketID = p_strBasketID;
+//	}
+//
+//	public String getBasketID(){
+//		return basketID;
+//	}
 
 	public void setBasketItemID(int p_intBasketItemID){
 		this.basketItemID = p_intBasketItemID;
@@ -57,5 +61,13 @@ public class BasketItemModel {
 
 	public int getBasketItemID(){
 		return basketItemID;
+	}
+
+	public void setBasket(BasketModel p_basket){
+		this.basket = p_basket;
+	}
+
+	public BasketModel getBasket(){
+		return basket;
 	}
 }
