@@ -1,0 +1,10 @@
+{
+  "BasketItemModel": {
+    "BasketID": "string",
+    "BasketItemID": 1,
+    "ProductID": "string",
+    "UnitPrice": 10.01,
+    "Quantity": 10
+  }
+}
+
