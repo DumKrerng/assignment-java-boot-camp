@@ -6,13 +6,22 @@ import java.util.*;
 import com.example.Shopping.BasketItem.*;
 import org.hibernate.annotations.*;
 
+//@NamedEntityGraph(
+//	name = "Basket-With-BasketItem",
+//	attributeNodes = {
+//		@NamedAttributeNode("id"),
+//		@NamedAttributeNode("basketStatus"),
+//		@NamedAttributeNode("basketItems")
+//	}
+//)
+
 @Entity
 public class BasketModel {
 
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	private String basketID;
+	private String id;
 
 	private String basketStatus;
 
@@ -22,6 +31,7 @@ public class BasketModel {
 
 	public BasketModel() {
 		this.basketItems = new ArrayList<>();
+		this.basketStatus = BasketStatus.OPEN.name();
 	}
 
 	public void setBasketStatus(String p_strBasketStatus){
@@ -32,15 +42,15 @@ public class BasketModel {
 		return basketStatus;
 	}
 
-	public void setBasketID(String p_strBasketID){
-		this.basketID = p_strBasketID;
+	public void setId(String p_strID){
+		this.id = p_strID;
 	}
 
-	public String getBasketID(){
-		return basketID;
+	public String getId(){
+		return id;
 	}
 
-	public void setBasketItemModels(List<BasketItemModel> p_lsBasketItems) {
+	public void setBasketItems(List<BasketItemModel> p_lsBasketItems) {
 		this.basketItems = p_lsBasketItems;
 	}
 
@@ -51,14 +61,4 @@ public class BasketModel {
 	public List<BasketItemModel> getBasketItems() {
 		return basketItems;
 	}
-
-	/*
-	*
-    @Column(name = "last_name")
-    private String lastName;
-
-    @OneToMany
-    private Set<Role> roles;
-	*
-	* */
 }

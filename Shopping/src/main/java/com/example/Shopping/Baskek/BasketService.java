@@ -16,42 +16,55 @@ public class BasketService {
     @Autowired
     private BasketRepository m_repoBasket;
 
-//    @Autowired
-//    private BasketItemRepository m_repoBasketItem;
+    @Autowired
+    private BasketItemRepository m_repoBasketItem;
 
     @Autowired
     private ProductRepository m_repoProduct;
 
-//    public void setMockRepository(ProductRepository p_repProduct, BasketRepository p_repBasket, BasketItemRepository p_repBasketItem) {
     public void setMockRepository(ProductRepository p_repProduct, BasketRepository p_repBasket) {
         m_repoProduct = p_repProduct;
         m_repoBasket = p_repBasket;
-//        m_repoBasketItem = p_repBasketItem;
+    }
+
+    @Transactional
+    public BasketModel getBasketIsOpen() {
+        Optional<BasketModel> optBasket = m_repoBasket.findByBasketStatus(BasketStatus.OPEN.name());
+        if(!optBasket.isPresent()) {
+            throw new NotFoundException("Basket Open");
+        }
+
+        BasketModel modelBasket = optBasket.get();
+
+        return modelBasket;
     }
 
     @Transactional
     public BasketModel addProduct(String p_strProductCode) {
         Optional<ProductModel> optProduct = m_repoProduct.findByProductCode(p_strProductCode);
-
         if(!optProduct.isPresent()) {
             throw new NotFoundException(p_strProductCode);
         }
 
         ProductModel modelProduct = optProduct.get();
+        BasketModel modelBasket;
 
-        BasketModel modelBasket = new BasketModel();
-        modelBasket.setBasketStatus(BasketStatus.OPEN.name());
+        try {
+            modelBasket = getBasketIsOpen();
 
-        BasketItemModel modelBasketItem = new BasketItemModel();
+        } catch(NotFoundException exc) {
+            modelBasket = new BasketModel();
+        }
+
+        BasketItemModel modelBasketItem = new BasketItemModel(modelBasket);
         modelBasketItem.setBasket(modelBasket);
-//        modelBasketItem.setBasketID(modelBasket.getBasketID());
         modelBasketItem.setProductID(modelProduct.getProductID());
         modelBasketItem.setUnitPrice(modelProduct.getUnitPrice());
-        modelBasketItem.setQuantity(12);
+        modelBasketItem.setQuantity(1);
         modelBasket.addBasketItem(modelBasketItem);
 
         modelBasket = m_repoBasket.save(modelBasket);
-        modelBasket = m_repoBasket.getById(modelBasket.getBasketID());
+        modelBasket = m_repoBasket.getById(modelBasket.getId());
 
         return modelBasket;
     }
