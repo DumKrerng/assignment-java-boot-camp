@@ -1,4 +1,4 @@
-##User Stories
+## User Stories
 1. User: DumKrerng ทำการ Login เข้าสู่ web
 2. User ค้นหาข้อมูล Product ด้วย ""
 3. User เลือกดูรายละเอียด Product: 
@@ -9,8 +9,8 @@
 8. User กด "ส่ั่งสินค้า"
 ___
 
-##API Function
-###1. User: DumKrerng ทำการ Login เข้าสู่ web
+## API Function
+### 1. User: DumKrerng ทำการ Login เข้าสู่ web
 Endpoint: 
 ```
 [POST] /api/v1/login
@@ -37,7 +37,7 @@ Response:
 ```
 ___
 
-###2. User ค้นหาข้อมูล Product ด้วย ""
+### 2. User ค้นหาข้อมูล Product ด้วย ""
 Endpoint:
 ```
 [GET] /api/v1/search/product/{searchValue}
@@ -69,7 +69,7 @@ Response:
 ```
 ___
 
-###4. User กด "ใส่ตะกร้า"
+### 4. User กด "ใส่ตะกร้า"
 Endpoint:
 ```
 [POST] /api/v1/basket/product/{productCode}
@@ -102,8 +102,8 @@ Response:
 ```
 ___
 
-###5. User กด "ชำระสินค้า", 6. User เลือก ที่อยู่การจัดส่ง
-####Show Basket detail
+### 5. User กด "ชำระสินค้า", 6. User เลือก ที่อยู่การจัดส่ง
+#### Show Basket detail
 Endpoint:
 ```
 [GET] /api/v1/basket/
@@ -135,7 +135,7 @@ Response:
 }
 ```
 
-####Show Shipping detail
+#### Show Shipping detail
 Endpoint:
 ```
 [GET] /api/v1/shippingdetail
@@ -165,7 +165,7 @@ Response:
 ```
 ___
 
-###8. User กด "ส่ั่งสินค้า"
+### 8. User กด "ส่ั่งสินค้า"
 Endpoint:
 ```
 [POST] /api/v1/order
