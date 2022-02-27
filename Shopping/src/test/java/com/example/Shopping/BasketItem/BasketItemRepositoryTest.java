@@ -15,13 +15,13 @@ class BasketItemRepositoryTest {
     @Test
     void testSave() {
         BasketItemModel model = new BasketItemModel();
-        model.setBasketID("BasketID");
+//        model.setBasketID("BasketID");
         model.setProductID("ProductID");
         model.setQuantity(1);
 
         BasketItemModel result = m_repository.save(model);
 
-        assertEquals(model.getBasketID(), result.getBasketID());
+//        assertEquals(model.getBasketID(), result.getBasketID());
         assertEquals(model.getProductID(), result.getProductID());
     }
 }

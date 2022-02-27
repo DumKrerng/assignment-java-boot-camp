@@ -1,6 +1,9 @@
 package com.example.Shopping.Baskek;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.*;
+import org.springframework.data.jpa.repository.*;
 
 public interface BasketRepository extends JpaRepository<BasketModel, String> {
+//	@EntityGraph(value = "Basket-With-BasketItem")
+	Optional<BasketModel> findByBasketStatus(String p_strBasketStatus);
 }

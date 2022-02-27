@@ -1,10 +1,19 @@
 package com.example.Shopping.Baskek;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.*;
+import com.example.Shopping.BasketItem.*;
+import org.hibernate.annotations.*;
+
+//@NamedEntityGraph(
+//	name = "Basket-With-BasketItem",
+//	attributeNodes = {
+//		@NamedAttributeNode("id"),
+//		@NamedAttributeNode("basketStatus"),
+//		@NamedAttributeNode("basketItems")
+//	}
+//)
 
 @Entity
 public class BasketModel {
@@ -12,35 +21,44 @@ public class BasketModel {
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	private String basketID;
+	private String id;
 
 	private String basketStatus;
 
-	public BasketModel() {}
+	@OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
+//	@OneToMany(mappedBy = "basket", fetch = FetchType.LAZY) //Default
+	private List<BasketItemModel> basketItems;
 
-	public void setBasketStatus(String basketStatus){
-		this.basketStatus = basketStatus;
+	public BasketModel() {
+		this.basketItems = new ArrayList<>();
+		this.basketStatus = BasketStatus.OPEN.name();
+	}
+
+	public void setBasketStatus(String p_strBasketStatus){
+		this.basketStatus = p_strBasketStatus;
 	}
 
 	public String getBasketStatus(){
 		return basketStatus;
 	}
 
-	public void setBasketID(String basketID){
-		this.basketID = basketID;
+	public void setId(String p_strID){
+		this.id = p_strID;
 	}
 
-	public String getBasketID(){
-		return basketID;
+	public String getId(){
+		return id;
 	}
 
-	/*
-	*
-    @Column(name = "last_name")
-    private String lastName;
+	public void setBasketItems(List<BasketItemModel> p_lsBasketItems) {
+		this.basketItems = p_lsBasketItems;
+	}
 
-    @OneToMany
-    private Set<Role> roles;
-	*
-	* */
+	public void addBasketItem(BasketItemModel p_basketItemModel) {
+		this.basketItems.add(p_basketItemModel);
+	}
+
+	public List<BasketItemModel> getBasketItems() {
+		return basketItems;
+	}
 }
