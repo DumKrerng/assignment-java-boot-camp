@@ -24,7 +24,7 @@ class UserServiceTest {
         mockUser.setUserID("123456");
         mockUser.setUsername("Test");
         mockUser.setPassword("123456");
-        when(m_repository.findByUsername("Test")).thenReturn(Optional.of(mockUser));
+        when(m_repository.findByUsernameIs("Test")).thenReturn(Optional.of(mockUser));
 
         UserService service = new UserService();
         service.setMockUserRepository(m_repository);
@@ -40,7 +40,7 @@ class UserServiceTest {
     @Test
     @DisplayName("ทดสอบ ค้นหา UserModel ด้วย Username แล้วไม่พบ UserModel")
     void testGetUserByUsername_02() {
-        when(m_repository.findByUsername("Test")).thenReturn(Optional.empty());
+        when(m_repository.findByUsernameIs("Test")).thenReturn(Optional.empty());
 
         UserService service = new UserService();
         service.setMockUserRepository(m_repository);

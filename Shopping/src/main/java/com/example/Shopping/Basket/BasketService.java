@@ -1,23 +1,18 @@
-package com.example.Shopping.Baskek;
+package com.example.Shopping.Basket;
 
 import java.util.*;
-import com.example.Shopping.BasketItem.*;
 import com.example.Shopping.Product.*;
 import com.example.Shopping.utility.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
 @Service
-@Scope("singleton")
+//@Scope("singleton")
 public class BasketService {
 
     @Autowired
     private BasketRepository m_repoBasket;
-
-    @Autowired
-    private BasketItemRepository m_repoBasketItem;
 
     @Autowired
     private ProductRepository m_repoProduct;
@@ -63,7 +58,7 @@ public class BasketService {
         modelBasketItem.setQuantity(1);
         modelBasket.addBasketItem(modelBasketItem);
 
-        modelBasket = m_repoBasket.save(modelBasket);
+        modelBasket = m_repoBasket.saveAndFlush(modelBasket);
         modelBasket = m_repoBasket.getById(modelBasket.getId());
 
         return modelBasket;

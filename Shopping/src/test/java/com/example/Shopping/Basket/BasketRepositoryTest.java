@@ -1,6 +1,5 @@
-package com.example.Shopping.Baskek;
+package com.example.Shopping.Basket;
 
-import com.example.Shopping.BasketItem.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.autoconfigure.orm.jpa.*;

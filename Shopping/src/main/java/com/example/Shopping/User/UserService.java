@@ -19,7 +19,7 @@ public class UserService {
     }
 
     public UserModel getUserByUsername(String p_strUsername) {
-        Optional<UserModel> optUser = m_userRepository.findByUsername(p_strUsername);
+        Optional<UserModel> optUser = m_userRepository.findByUsernameIs(p_strUsername);
 
         if(optUser.isPresent()) {
             return optUser.get();
