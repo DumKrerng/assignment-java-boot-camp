@@ -22,16 +22,13 @@ public class BasketModel {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 
-	private String basketStatus;
+	private String basketStatus = BasketStatus.OPEN.name();
 
 	//	@OneToMany(mappedBy = "basket", fetch = FetchType.LAZY) //Default
-	@OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
-	private List<BasketItemModel> basketItems;
+	@OneToMany(mappedBy = "basket", fetch = FetchType.EAGER, targetEntity=BasketItemModel.class)
+	private List<BasketItemModel> basketItems = new ArrayList<>();
 
-	public BasketModel() {
-		this.basketItems = new ArrayList<>();
-		this.basketStatus = BasketStatus.OPEN.name();
-	}
+	public BasketModel() {}
 
 	public void setBasketStatus(String p_strBasketStatus){
 		this.basketStatus = p_strBasketStatus;
