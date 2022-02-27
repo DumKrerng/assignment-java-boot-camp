@@ -58,7 +58,7 @@ public class BasketService {
         modelBasketItem.setQuantity(1);
         modelBasket.addBasketItem(modelBasketItem);
 
-        modelBasket = m_repoBasket.saveAndFlush(modelBasket);
+        modelBasket = m_repoBasket.save(modelBasket);
         modelBasket = m_repoBasket.getById(modelBasket.getId());
 
         return modelBasket;

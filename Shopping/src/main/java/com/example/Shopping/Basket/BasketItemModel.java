@@ -1,22 +1,20 @@
 package com.example.Shopping.Basket;
 
 import javax.persistence.*;
-import com.fasterxml.jackson.annotation.*;
 
 @Entity
 public class BasketItemModel {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String productID;
 	private double unitPrice;
 	private int quantity;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "basket_id", nullable = false, referencedColumnName = "id")
-	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "basket_id", referencedColumnName = "id", nullable = false)
 	private BasketModel basket;
 
 	public BasketItemModel() {}
@@ -49,14 +47,6 @@ public class BasketItemModel {
 		return productID;
 	}
 
-//	public void setBasketID(String p_strBasketID){
-//		this.basketID = p_strBasketID;
-//	}
-//
-//	public String getBasketID(){
-//		return basketID;
-//	}
-
 	public void setId(int p_intID){
 		this.id = p_intID;
 	}
@@ -71,5 +61,10 @@ public class BasketItemModel {
 
 	public BasketModel getBasket(){
 		return basket;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("BasketItemID: %d", id);
 	}
 }
