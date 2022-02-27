@@ -1,10 +1,9 @@
-package com.example.Shopping.Baskek;
+package com.example.Shopping.Basket;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.example.Shopping.BasketItem.*;
 import com.example.Shopping.Product.*;
 import com.example.Shopping.utility.*;
 import org.junit.jupiter.api.*;

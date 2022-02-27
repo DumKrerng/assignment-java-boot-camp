@@ -1,4 +1,4 @@
-package com.example.Shopping.Baskek;
+package com.example.Shopping.Basket;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
@@ -8,9 +8,6 @@ public class BasketController {
 
     @Autowired
     private BasketService m_service;
-
-    @Autowired
-    private BasketRepository m_repoBasket;
 
     @PostMapping("/api/v1/basket/product/{p_strProductCode}")
     public ResponseBasket addProduct(@PathVariable String p_strProductCode) {

@@ -1,19 +1,18 @@
-package com.example.Shopping.Baskek;
+package com.example.Shopping.Basket;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.*;
-import com.example.Shopping.BasketItem.*;
 import org.hibernate.annotations.*;
 
-//@NamedEntityGraph(
-//	name = "Basket-With-BasketItem",
-//	attributeNodes = {
-//		@NamedAttributeNode("id"),
-//		@NamedAttributeNode("basketStatus"),
-//		@NamedAttributeNode("basketItems")
-//	}
-//)
+@NamedEntityGraph(
+	name = "Basket-With-BasketItem",
+	attributeNodes = {
+		@NamedAttributeNode("id"),
+		@NamedAttributeNode("basketStatus"),
+		@NamedAttributeNode("basketItems"),
+	}
+)
 
 @Entity
 public class BasketModel {
@@ -25,8 +24,8 @@ public class BasketModel {
 
 	private String basketStatus;
 
+	//	@OneToMany(mappedBy = "basket", fetch = FetchType.LAZY) //Default
 	@OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
-//	@OneToMany(mappedBy = "basket", fetch = FetchType.LAZY) //Default
 	private List<BasketItemModel> basketItems;
 
 	public BasketModel() {
@@ -54,8 +53,8 @@ public class BasketModel {
 		this.basketItems = p_lsBasketItems;
 	}
 
-	public void addBasketItem(BasketItemModel p_basketItemModel) {
-		this.basketItems.add(p_basketItemModel);
+	public void addBasketItem(BasketItemModel p_basketItems) {
+		this.basketItems.add(p_basketItems);
 	}
 
 	public List<BasketItemModel> getBasketItems() {

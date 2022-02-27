@@ -1,7 +1,6 @@
-package com.example.Shopping.BasketItem;
+package com.example.Shopping.Basket;
 
 import javax.persistence.*;
-import com.example.Shopping.Baskek.*;
 import com.fasterxml.jackson.annotation.*;
 
 @Entity
@@ -15,8 +14,8 @@ public class BasketItemModel {
 	private double unitPrice;
 	private int quantity;
 
-	@ManyToOne
-	@JoinColumn(name = "basket_id", nullable = false)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "basket_id", nullable = false, referencedColumnName = "id")
 	@JsonIgnore
 	private BasketModel basket;
 

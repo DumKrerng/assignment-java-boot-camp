@@ -1,14 +1,17 @@
 package com.example.Shopping.User;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.*;
+import org.hibernate.annotations.*;
 
 @Entity
 public class UserModel {
 
 	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String userID;
+
 	private String username;
 	private String userEmail;
 	private String userFullName;
