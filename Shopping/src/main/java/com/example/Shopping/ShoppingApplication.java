@@ -37,6 +37,18 @@ public class ShoppingApplication {
 		product = new ProductModel("ProductA", "ProductA");
 		product.setUnitPrice(13);
 		m_repoProduct.save(product);
+
+		product = new ProductModel("ProductCodeX", "ProductNameX");
+		product.setUnitPrice(3);
+		m_repoProduct.save(product);
+
+		product = new ProductModel("CodeX", "NameX");
+		product.setUnitPrice(30);
+		m_repoProduct.save(product);
+
+		product = new ProductModel("เสื้อX", "เสื้อX");
+		product.setUnitPrice(30.50);
+		m_repoProduct.save(product);
 	}
 
 	public static void main(String[] args) {

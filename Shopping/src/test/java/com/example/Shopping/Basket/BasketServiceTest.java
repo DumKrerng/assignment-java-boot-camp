@@ -20,11 +20,26 @@ class BasketServiceTest {
     @Autowired
     private BasketRepository m_repoBasket;
 
-    @BeforeAll
-    public void setup() {
-        ProductModel product = new ProductModel("ProductX", "ProductX");
-        m_repoProduct.save(product);
-    }
+//    ProductModel product = new ProductModel("ProductX", "ProductX");
+//		product.setUnitPrice(10);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("ProductA", "ProductA");
+//		product.setUnitPrice(13);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("ProductCodeX", "ProductNameX");
+//		product.setUnitPrice(3);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("CodeX", "NameX");
+//		product.setUnitPrice(30);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("เสื้อX", "เสื้อX");
+//		product.setUnitPrice(30.50);
+//		m_repoProduct.save(product);
+
 
     @Test
     @DisplayName("ทดสอบ เพิ่ม Product ลงตะกร้า แล้วมี 1 ชิ้นในตะกร้า")

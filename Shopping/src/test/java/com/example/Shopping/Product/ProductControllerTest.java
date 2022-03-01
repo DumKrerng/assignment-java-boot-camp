@@ -19,12 +19,32 @@ class ProductControllerTest {
     @Autowired
     private ProductRepository m_repository;
 
-    @BeforeAll
-    public void setup() {
-        m_repository.save(new ProductModel("ProductCodeX", "ProductNameX"));
-        m_repository.save(new ProductModel("CodeX", "NameX"));
-        m_repository.save(new ProductModel("เสื้อX", "เสื้อX"));
-    }
+//    @BeforeAll
+//    public void setup() {
+//        m_repository.save(new ProductModel("ProductCodeX", "ProductNameX"));
+//        m_repository.save(new ProductModel("CodeX", "NameX"));
+//        m_repository.save(new ProductModel("เสื้อX", "เสื้อX"));
+//    }
+
+//    ProductModel product = new ProductModel("ProductX", "ProductX");
+//		product.setUnitPrice(10);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("ProductA", "ProductA");
+//		product.setUnitPrice(13);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("ProductCodeX", "ProductNameX");
+//		product.setUnitPrice(3);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("CodeX", "NameX");
+//		product.setUnitPrice(30);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("เสื้อX", "เสื้อX");
+//		product.setUnitPrice(30.50);
+//		m_repoProduct.save(product);
 
     @Test
     @DisplayName("ทดสอบ ค้นหา Product ด้วย \"Code\" แล้ว พบข้อมูล 2 ตัว")
@@ -41,7 +61,7 @@ class ProductControllerTest {
         ResponseProductSearch response = m_template.getForObject("/api/v1/search/product/Product", ResponseProductSearch.class);
         List<ProductModel> lsProducts = response.getData();
 
-        assertEquals(1, lsProducts.size());
+        assertEquals(3, lsProducts.size());
     }
 
     @Test
@@ -50,7 +70,7 @@ class ProductControllerTest {
         ResponseProductSearch response = m_template.getForObject("/api/v1/search/product/product", ResponseProductSearch.class);
         List<ProductModel> lsProducts = response.getData();
 
-        assertEquals(1, lsProducts.size());
+        assertEquals(3, lsProducts.size());
     }
 
     @Test

@@ -25,16 +25,25 @@ class BasketControllerTest {
     @Autowired
     private BasketRepository m_repoBasket;
 
-    @BeforeAll
-    public void setup() {
-        ProductModel product = new ProductModel("ProductX", "ProductX");
-        product.setUnitPrice(10);
-        m_repoProduct.save(product);
-
-        product = new ProductModel("ProductA", "ProductA");
-        product.setUnitPrice(13);
-        m_repoProduct.save(product);
-    }
+//    ProductModel product = new ProductModel("ProductX", "ProductX");
+//		product.setUnitPrice(10);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("ProductA", "ProductA");
+//		product.setUnitPrice(13);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("ProductCodeX", "ProductNameX");
+//		product.setUnitPrice(3);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("CodeX", "NameX");
+//		product.setUnitPrice(30);
+//		m_repoProduct.save(product);
+//
+//    product = new ProductModel("เสื้อX", "เสื้อX");
+//		product.setUnitPrice(30.50);
+//		m_repoProduct.save(product);
 
     @Test
     @DisplayName("ทดสอบ เพิ่ม Product: ProductX ลงในตะกร้า แล้วมี Product ในตะกร้า 1 ตัว")
@@ -55,6 +64,8 @@ class BasketControllerTest {
         assertEquals(BasketStatus.OPEN.name(), modelBasket.getBasketStatus());
         assertEquals(10, modelBasketItem.getUnitPrice());
         assertEquals(1, modelBasketItem.getQuantity());
+
+        m_repoBasket.deleteAll();
     }
 
     @Test
@@ -71,9 +82,11 @@ class BasketControllerTest {
         ResponseBasket body = response.getBody();
         assertEquals(String.format("%s is not found!", strProductCode), body.getMessage());
         assertNull(body.getData());
+
+        m_repoBasket.deleteAll();
     }
 
-//    @Test
+    @Test
     @DisplayName("ทดสอบ ดึงข้อมูล Basket Open แล้ว พบข้อมูล")
     void testGetBasketDetail_01() {
         BasketModel mockBasket = new BasketModel();
@@ -108,5 +121,7 @@ class BasketControllerTest {
 
         basketItem = basketItems.get(1);
         assertEquals(5.50, basketItem.getUnitPrice());
+
+        m_repoBasket.deleteAll();
     }
 }
