@@ -1,5 +1,6 @@
 package com.example.Shopping.Basket;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.*;
@@ -25,7 +26,7 @@ public class BasketModel {
 	private String basketStatus = BasketStatus.OPEN.name();
 
 	//	@OneToMany(mappedBy = "basket", fetch = FetchType.LAZY) //Default
-	@OneToMany(mappedBy = "basket", fetch = FetchType.EAGER, targetEntity=BasketItemModel.class)
+	@OneToMany(mappedBy = "basket", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<BasketItemModel> basketItems = new ArrayList<>();
 
 	public BasketModel() {}

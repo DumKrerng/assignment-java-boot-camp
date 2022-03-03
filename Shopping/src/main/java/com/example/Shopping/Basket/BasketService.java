@@ -54,6 +54,7 @@ public class BasketService {
         BasketItemModel modelBasketItem = new BasketItemModel(modelBasket);
         modelBasketItem.setBasket(modelBasket);
         modelBasketItem.setProductID(modelProduct.getProductID());
+        modelBasketItem.setProductLabel(modelProduct.getProductLabel());
         modelBasketItem.setUnitPrice(modelProduct.getUnitPrice());
         modelBasketItem.setQuantity(1);
         modelBasket.addBasketItem(modelBasketItem);

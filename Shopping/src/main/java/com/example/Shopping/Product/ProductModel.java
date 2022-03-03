@@ -1,11 +1,8 @@
 package com.example.Shopping.Product;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import org.hibernate.annotations.*;
 
 @Entity
 public class ProductModel {
@@ -97,5 +94,9 @@ public class ProductModel {
 
 	public String getProductTitle(){
 		return productTitle;
+	}
+
+	public String getProductLabel() {
+		return String.format("%s-%s", productCode, productName);
 	}
 }

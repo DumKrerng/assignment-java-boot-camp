@@ -10,6 +10,7 @@ public class BasketItemModel {
 	private int id;
 
 	private String productID;
+	private String productLabel;
 	private double unitPrice;
 	private int quantity;
 
@@ -45,6 +46,14 @@ public class BasketItemModel {
 
 	public String getProductID(){
 		return productID;
+	}
+
+	public void setProductLabel(String p_strProductLabel){
+		this.productLabel = p_strProductLabel;
+	}
+
+	public String getProductLabel(){
+		return productLabel;
 	}
 
 	public void setId(int p_intID){

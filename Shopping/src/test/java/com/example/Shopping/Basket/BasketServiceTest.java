@@ -124,19 +124,21 @@ class BasketServiceTest {
         ProductModel product = optProduct.get();
 
         BasketModel mockBasket = new BasketModel();
-        mockBasket.setBasketStatus(BasketStatus.CLOSED.name());
-        BasketItemModel mockBasketItem = new BasketItemModel();
+        BasketItemModel mockBasketItem = new BasketItemModel(mockBasket);
         mockBasketItem.setProductID(product.getProductID());
+        mockBasketItem.setProductLabel(product.getProductLabel());
         mockBasketItem.setQuantity(1);
         mockBasketItem.setUnitPrice(10.50);
         mockBasket.addBasketItem(mockBasketItem);
 
-        mockBasketItem = new BasketItemModel();
+        mockBasketItem = new BasketItemModel(mockBasket);
         mockBasketItem.setProductID(product.getProductID());
+        mockBasketItem.setProductLabel(product.getProductLabel());
         mockBasketItem.setQuantity(1);
         mockBasketItem.setUnitPrice(5.50);
         mockBasket.addBasketItem(mockBasketItem);
 
+        mockBasket.setBasketStatus(BasketStatus.CLOSED.name());
         m_repoBasket.save(mockBasket);
 
         BasketService service = new BasketService();

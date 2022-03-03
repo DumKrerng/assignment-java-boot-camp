@@ -45,6 +45,11 @@ class BasketControllerTest {
 //		product.setUnitPrice(30.50);
 //		m_repoProduct.save(product);
 
+    @BeforeEach
+    void deleteAllBasket() {
+        m_repoBasket.deleteAll();
+    }
+
     @Test
     @DisplayName("ทดสอบ เพิ่ม Product: ProductX ลงในตะกร้า แล้วมี Product ในตะกร้า 1 ตัว")
     void testAddProduct_01() {
@@ -64,8 +69,6 @@ class BasketControllerTest {
         assertEquals(BasketStatus.OPEN.name(), modelBasket.getBasketStatus());
         assertEquals(10, modelBasketItem.getUnitPrice());
         assertEquals(1, modelBasketItem.getQuantity());
-
-        m_repoBasket.deleteAll();
     }
 
     @Test
@@ -82,8 +85,6 @@ class BasketControllerTest {
         ResponseBasket body = response.getBody();
         assertEquals(String.format("%s is not found!", strProductCode), body.getMessage());
         assertNull(body.getData());
-
-        m_repoBasket.deleteAll();
     }
 
     @Test
@@ -121,7 +122,5 @@ class BasketControllerTest {
 
         basketItem = basketItems.get(1);
         assertEquals(5.50, basketItem.getUnitPrice());
-
-        m_repoBasket.deleteAll();
     }
 }

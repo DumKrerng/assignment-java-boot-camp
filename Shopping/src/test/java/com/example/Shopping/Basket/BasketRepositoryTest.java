@@ -17,13 +17,13 @@ public class BasketRepositoryTest {
 	@DisplayName("ทดสอบการสร้าง Basket ที่มี BasketItem 2 รายการ")
 	public void testAddProduct() {
 		BasketModel mockBasket = new BasketModel();
-		BasketItemModel mockBasketItem = new BasketItemModel();
+		BasketItemModel mockBasketItem = new BasketItemModel(mockBasket);
 		mockBasketItem.setProductID("ProductID-1");
 		mockBasketItem.setQuantity(1);
 		mockBasketItem.setUnitPrice(10.50);
 		mockBasket.addBasketItem(mockBasketItem);
 
-		mockBasketItem = new BasketItemModel();
+		mockBasketItem = new BasketItemModel(mockBasket);
 		mockBasketItem.setProductID("ProductID-2");
 		mockBasketItem.setQuantity(1);
 		mockBasketItem.setUnitPrice(5.50);
