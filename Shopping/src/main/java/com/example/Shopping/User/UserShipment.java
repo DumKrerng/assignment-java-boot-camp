@@ -1,27 +1,18 @@
 package com.example.Shopping.User;
 
-public class ResponseShipment {
+public class UserShipment {
 
-	private String m_strUserEmail;
-	private String m_strUserFullName;
+	private UserModel m_user;
 	private AddressModel m_address;
 	
-	public ResponseShipment() {}
+	public UserShipment() {}
 
-	public String getUserEmail() {
-		return m_strUserEmail;
+	public UserModel getUser() {
+		return m_user;
 	}
 
-	public void setUserEmail(String p_strUserEmail) {
-		m_strUserEmail = p_strUserEmail;
-	}
-
-	public String getUserFullName() {
-		return m_strUserFullName;
-	}
-
-	public void setUserFullName(String p_strUserFullName) {
-		m_strUserFullName = p_strUserFullName;
+	public void setUser(UserModel p_user) {
+		m_user = p_user;
 	}
 
 	public AddressModel getAddress() {

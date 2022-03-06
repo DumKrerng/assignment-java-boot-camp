@@ -27,40 +27,40 @@ public class UserModel {
 		return userID;
 	}
 
-	public void setUsername(String username){
-		this.username = username;
+	public void setUsername(String p_username){
+		this.username = p_username;
 	}
 
 	public String getUsername(){
 		return username;
 	}
 
-	public void setUserEmail(String userEmail){
-		this.userEmail = userEmail;
+	public void setUserEmail(String p_userEmail){
+		this.userEmail = p_userEmail;
 	}
 
 	public String getUserEmail(){
 		return userEmail;
 	}
 
-	public void setUserFullName(String userFullName){
-		this.userFullName = userFullName;
+	public void setUserFullName(String p_userFullName){
+		this.userFullName = p_userFullName;
 	}
 
 	public String getUserFullName(){
 		return userFullName;
 	}
 
-	public void setPassword(String password){
-		this.password = password;
+	public void setPassword(String p_password){
+		this.password = p_password;
 	}
 
 	public String getPassword(){
 		return password;
 	}
 
-	public void setName(String name){
-		this.name = name;
+	public void setName(String p_name){
+		this.name = p_name;
 	}
 
 	public String getName(){
