@@ -4,7 +4,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.example.Shopping.Product.*;
+import com.example.Shopping.product.*;
 import com.example.Shopping.utility.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;

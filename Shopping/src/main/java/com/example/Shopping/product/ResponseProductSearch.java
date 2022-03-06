@@ -1,4 +1,4 @@
-package com.example.Shopping.Product;
+package com.example.Shopping.product;
 
 import com.example.Shopping.utility.ApiResponse;
 

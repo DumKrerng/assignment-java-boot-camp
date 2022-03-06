@@ -1,4 +1,4 @@
-package com.example.Shopping.Product;
+package com.example.Shopping.product;
 
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

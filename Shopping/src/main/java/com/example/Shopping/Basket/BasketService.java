@@ -1,7 +1,7 @@
 package com.example.Shopping.Basket;
 
 import java.util.*;
-import com.example.Shopping.Product.*;
+import com.example.Shopping.product.*;
 import com.example.Shopping.utility.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
