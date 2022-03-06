@@ -1,4 +1,4 @@
-package com.example.Shopping.Basket;
+package com.example.Shopping.basket;
 
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;

@@ -1,4 +1,4 @@
-package com.example.Shopping.Basket;
+package com.example.Shopping.basket;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;

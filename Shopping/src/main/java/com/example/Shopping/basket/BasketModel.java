@@ -1,4 +1,4 @@
-package com.example.Shopping.Basket;
+package com.example.Shopping.basket;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
