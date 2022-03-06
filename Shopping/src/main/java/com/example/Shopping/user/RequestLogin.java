@@ -1,4 +1,4 @@
-package com.example.Shopping.User;
+package com.example.Shopping.user;
 
 public class RequestLogin {
 

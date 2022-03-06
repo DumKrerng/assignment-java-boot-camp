@@ -1,4 +1,4 @@
-package com.example.Shopping.User;
+package com.example.Shopping.user;
 
 import org.hibernate.annotations.*;
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.example.Shopping.User;
+package com.example.Shopping.user;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;

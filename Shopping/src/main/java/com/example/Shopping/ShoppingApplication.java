@@ -2,7 +2,7 @@ package com.example.Shopping;
 
 import javax.annotation.*;
 import com.example.Shopping.Product.*;
-import com.example.Shopping.User.*;
+import com.example.Shopping.user.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
