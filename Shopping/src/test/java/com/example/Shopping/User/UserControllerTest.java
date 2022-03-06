@@ -1,17 +1,18 @@
 package com.example.Shopping.User;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+
+import com.example.Shopping.utility.*;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.test.context.*;
+import org.springframework.boot.test.mock.mockito.*;
+import org.springframework.boot.test.web.client.*;
+import org.springframework.http.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserControllerTest {
@@ -24,7 +25,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("Login success, Found User.")
-    void TestLogin_01() {
+    void testLogin_01() {
         UserModel mockUser = new UserModel();
         mockUser.setUserID("123456");
         mockUser.setUsername("Test");
@@ -49,7 +50,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("Login success, Not Found User.")
-    void TestLogin_02() {
+    void testLogin_02() {
         UserModel mockUser = new UserModel();
         mockUser.setUserID("123456");
         mockUser.setUsername("Test");
@@ -69,5 +70,74 @@ class UserControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, httpstatus);
         assertEquals("User: Test not found!", strMessage);
         assertNull(resUser);
+    }
+
+    @Test
+    @DisplayName("ทดสอบหาข้อมูล Shipment แล้ว NotFoundException")
+    void testGetShipmentDetail_01() {
+        when(m_service.getUserShipment("Test")).thenThrow(new NotFoundException("Test"));
+
+        // create headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("data-userid", "Test");
+
+        // build the request
+        HttpEntity request = new HttpEntity(headers);
+
+        // make an HTTP GET request with headers
+        ResponseEntity<ApiResponse> response = m_template.exchange(
+          "/api/v1/user/shipment",
+          HttpMethod.GET,
+          request,
+          ApiResponse.class
+        );
+
+        HttpStatus httpstatus = response.getStatusCode();
+        ApiResponse body = response.getBody();
+
+        assertEquals(HttpStatus.NOT_FOUND, httpstatus);
+        assertEquals("Test is not found!", body.getMessage());
+    }
+
+    @Test
+    @DisplayName("ทดสอบหาข้อมูล Shipment แล้วพบข้อมูล")
+    void testGetShipmentDetail_02() {
+        String strUserID = "123456";
+
+        UserModel mockUser = new UserModel();
+        mockUser.setUserID(strUserID);
+        mockUser.setUsername("Test");
+        mockUser.setPassword("123456");
+
+        AddressModel mockAddress = new AddressModel();
+        mockAddress.setUserID(strUserID);
+        mockAddress.setAddressDetail("Test");
+        mockAddress.setPostcode("10000");
+
+        UserShipment shipment = new UserShipment();
+        shipment.setUser(mockUser);
+        shipment.setAddress(mockAddress);
+        when(m_service.getUserShipment(strUserID)).thenReturn(shipment);
+
+        // create headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("data-userid", strUserID);
+
+        // build the request
+        HttpEntity request = new HttpEntity(headers);
+
+        // make an HTTP GET request with headers
+        ResponseEntity<ResponseShipment> response = m_template.exchange(
+          "/api/v1/user/shipment",
+          HttpMethod.GET,
+          request,
+          ResponseShipment.class
+        );
+
+        HttpStatus httpstatus = response.getStatusCode();
+        ResponseShipment body = response.getBody();
+
+        assertEquals(HttpStatus.OK, httpstatus);
+        assertEquals(strUserID, body.getData().getUser().getUserID());
     }
 }

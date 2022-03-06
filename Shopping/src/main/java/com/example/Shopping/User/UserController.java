@@ -28,4 +28,13 @@ public class UserController {
 
         return response;
     }
+
+    @GetMapping("/api/v1/user/shipment")
+    public ResponseShipment getShipmentDetail(@RequestHeader("data-userid") String p_strUserID) {
+        UserShipment shipment = m_userService.getUserShipment(p_strUserID);
+        ResponseShipment response = new ResponseShipment();
+        response.setData(shipment);
+
+        return response;
+    }
 }

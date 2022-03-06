@@ -7,7 +7,7 @@ public class ApiResponse<T> {
     private HttpStatus m_httpstatus = HttpStatus.OK;
     private int m_intHttpCode = m_httpstatus.value();
     private String m_strMessage;
-    private T m_data;
+    protected T m_data;
 
     public HttpStatus getHttpStatus() {
         return m_httpstatus;
