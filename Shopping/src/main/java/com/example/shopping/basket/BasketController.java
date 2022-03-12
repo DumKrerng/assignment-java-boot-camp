@@ -11,18 +11,18 @@ public class BasketController {
 
     @PostMapping("/api/v1/basket/product/{p_strProductCode}")
     public ResponseBasket addProduct(@PathVariable String p_strProductCode) {
-        BasketModel result = m_service.addProduct(p_strProductCode);
+        BasketModel basket = m_service.addProduct(p_strProductCode);
         ResponseBasket response = new ResponseBasket();
-        response.setData(new BasketViewModel(result));
+        response.setData(new BasketViewModel(basket));
 
         return response;
     }
 
     @GetMapping("/api/v1/basket")
     public ResponseBasket getBasketDetail() {
-        BasketModel result = m_service.getBasketIsOpen();
+        BasketModel basket = m_service.getBasketIsOpen();
         ResponseBasket response = new ResponseBasket();
-        response.setData(new BasketViewModel(result));
+        response.setData(new BasketViewModel(basket));
 
         return response;
     }
