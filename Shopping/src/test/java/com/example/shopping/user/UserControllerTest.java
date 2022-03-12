@@ -38,7 +38,7 @@ class UserControllerTest {
         request.setPassword("123456");
 
         ResponseLogin response = m_template.postForObject("/api/v1/login", request, ResponseLogin.class);
-        UserModel resUser = response.getData();
+        UserViewModel resUser = response.getData();
 
         UserModel expectUser = new UserModel();
         expectUser.setUserID("123456");
@@ -65,7 +65,7 @@ class UserControllerTest {
         ResponseLogin response = m_template.postForObject("/api/v1/login", request, ResponseLogin.class);
         HttpStatus httpstatus = response.getHttpStatus();
         String strMessage = response.getMessage();
-        UserModel resUser = response.getData();
+        UserViewModel resUser = response.getData();
 
         assertEquals(HttpStatus.NOT_FOUND, httpstatus);
         assertEquals("User: Test not found!", strMessage);
@@ -104,13 +104,13 @@ class UserControllerTest {
     void testGetShipmentDetail_02() {
         String strUserID = "123456";
 
-        UserModel mockUser = new UserModel();
+        UserViewModel mockUser = new UserViewModel();
         mockUser.setUserID(strUserID);
         mockUser.setUsername("Test");
-        mockUser.setPassword("123456");
+//        mockUser.setPassword("123456");
 
-        AddressModel mockAddress = new AddressModel();
-        mockAddress.setUserID(strUserID);
+        AddressViewModel mockAddress = new AddressViewModel();
+//        mockAddress.setUserID(strUserID);
         mockAddress.setAddressDetail("Test");
         mockAddress.setPostcode("10000");
 

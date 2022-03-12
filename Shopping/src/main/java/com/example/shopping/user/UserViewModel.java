@@ -1,29 +1,21 @@
 package com.example.shopping.user;
 
-import javax.persistence.Entity;
-import javax.persistence.*;
-import org.hibernate.annotations.*;
-
-@Entity
-public class UserModel {
-
-	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	private String userID;
+public class UserViewModel {
 
 	private String username;
+	private String userID;
 	private String userEmail;
 	private String userFullName;
-	private String password;
 	private String name;
 
-	public void setUserID(String p_strUserID){
-		this.userID = p_strUserID;
-	}
+	public UserViewModel() {}
 
-	public String getUserID(){
-		return userID;
+	public UserViewModel(UserModel p_user) {
+		username = p_user.getUsername();
+		userID = p_user.getUserID();
+		userEmail = p_user.getUserEmail();
+		userFullName = p_user.getUserFullName();
+		name = p_user.getName();
 	}
 
 	public void setUsername(String p_username){
@@ -32,6 +24,14 @@ public class UserModel {
 
 	public String getUsername(){
 		return username;
+	}
+
+	public void setUserID(String p_userID){
+		this.userID = p_userID;
+	}
+
+	public String getUserID(){
+		return userID;
 	}
 
 	public void setUserEmail(String p_userEmail){
@@ -48,14 +48,6 @@ public class UserModel {
 
 	public String getUserFullName(){
 		return userFullName;
-	}
-
-	public void setPassword(String p_password){
-		this.password = p_password;
-	}
-
-	public String getPassword(){
-		return password;
 	}
 
 	public void setName(String p_name){

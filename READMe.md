@@ -85,19 +85,18 @@ Response:
 {
     HttpCode: int
     Message: string
-    Data: [
-    	{
-    	    ProductCode: string
-    	    ProductName: string
-    	    ProductTitle: string
-    	    ProductGallery: string
-    	    ProductRating: number
-    	    ProductDetail: number
-    	    UnitPrice: number
-    	    UnitDiscount: number
-            Quantity: number
-    	}
-    ]
+    Data: {
+	  "BasketID": "",
+	  "BasketStatus": "",
+	  "BasketItem": [
+	    {
+	      "ProductID": "",
+	      "ProductLabel": "",
+	      "UnitPrice": 10.01,
+	      "Quantity": 10
+	    }
+	  ]
+	}
 }
 ```
 ___
@@ -119,19 +118,18 @@ Response:
 {
     HttpCode: int
     Message: string
-    Data: [
-    	{
-    	    ProductCode: string
-    	    ProductName: string
-    	    ProductTitle: string
-    	    ProductGallery: string
-    	    ProductRating: number
-    	    ProductDetail: number
-    	    UnitPrice: number
-    	    UnitDiscount: number
-    	    QuantityOrder: number
-    	}
-    ]
+    Data: {
+	  "BasketID": "",
+	  "BasketStatus": "",
+	  "BasketItem": [
+	    {
+	      "ProductID": "",
+	      "ProductLabel": "",
+	      "UnitPrice": 10.01,
+	      "Quantity": 10
+	    }
+	  ]
+	}
 }
 ```
 

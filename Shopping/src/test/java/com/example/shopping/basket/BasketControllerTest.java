@@ -59,14 +59,13 @@ class BasketControllerTest {
                 "{}",
                 ResponseBasket.class);
         BasketViewModel viewmodel = response.getData();
-        BasketModel basket = viewmodel.getBasket();
+        List<BasketItemViewModel> Itemmodels = viewmodel.getBasketItems();
 
-        assertEquals(1, basket.getBasketItems().size());
+        assertEquals(1, Itemmodels.size());
 
-        BasketModel modelBasket = viewmodel.getBasket();
-        BasketItemModel modelBasketItem = basket.getBasketItems().get(0);
+        BasketItemViewModel modelBasketItem = Itemmodels.get(0);
 
-        assertEquals(BasketStatus.OPEN.name(), modelBasket.getBasketStatus());
+        assertEquals(BasketStatus.OPEN.name(), viewmodel.getBasketStatus());
         assertEquals(10, modelBasketItem.getUnitPrice());
         assertEquals(1, modelBasketItem.getQuantity());
     }
@@ -111,13 +110,12 @@ class BasketControllerTest {
 
         ResponseBasket body = response.getBody();
         BasketViewModel view = body.getData();
-        BasketModel basket = view.getBasket();
-        assertEquals(BasketStatus.OPEN.name(), basket.getBasketStatus());
+        assertEquals(BasketStatus.OPEN.name(), view.getBasketStatus());
 
-        List<BasketItemModel> basketItems = basket.getBasketItems();
+        List<BasketItemViewModel> basketItems = view.getBasketItems();
         assertEquals(2, basketItems.size());
 
-        BasketItemModel basketItem = basketItems.get(0);
+        BasketItemViewModel basketItem = basketItems.get(0);
         assertEquals(10.50, basketItem.getUnitPrice());
 
         basketItem = basketItems.get(1);

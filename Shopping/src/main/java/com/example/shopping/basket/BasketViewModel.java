@@ -1,27 +1,41 @@
 package com.example.shopping.basket;
 
-import java.util.*;
+import java.util.List;
 
 public class BasketViewModel {
+	private String basketStatus;
+	private List<BasketItemViewModel> basketItems;
+	private String basketID;
 
-    private BasketModel m_basket;
+	public BasketViewModel() {}
 
-    public BasketViewModel() {}
+	public BasketViewModel(BasketModel p_basket) {
+		basketID = p_basket.getId();
+		basketStatus = p_basket.getBasketStatus();
+		basketItems = BasketItemViewModel.transform(p_basket.getBasketItems());
+	}
 
-    public BasketViewModel(BasketModel p_modelBasket) {
-        m_basket = p_modelBasket;
-        List<BasketItemModel> lsBasketItems = p_modelBasket.getBasketItems();
+	public void setBasketStatus(String p_basketStatus){
+		this.basketStatus = p_basketStatus;
+	}
 
-        for(BasketItemModel item : lsBasketItems) {
-            item.setBasket(null);
-        }
-    }
+	public String getBasketStatus(){
+		return basketStatus;
+	}
 
-    public BasketModel getBasket() {
-        return m_basket;
-    }
+	public void setBasketItems(List<BasketItemViewModel> p_lsBasketItems){
+		this.basketItems = p_lsBasketItems;
+	}
 
-    public void setBasket(BasketModel p_basket) {
-        this.m_basket = p_basket;
-    }
+	public List<BasketItemViewModel> getBasketItems(){
+		return basketItems;
+	}
+
+	public void setBasketID(String p_basketID){
+		this.basketID = p_basketID;
+	}
+
+	public String getBasketID(){
+		return basketID;
+	}
 }
