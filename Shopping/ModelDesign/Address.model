@@ -1,0 +1,8 @@
+{
+  "AddressDetail": "string",
+  "Postcode": "string",
+  "Province": "string",
+  "District": "string",
+  "SubDistrict": "string",
+  "PhoneNumber": "string"
+}
