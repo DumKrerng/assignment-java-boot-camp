@@ -57,8 +57,8 @@ public class UserService {
         }
 
         UserShipment usershipment = new UserShipment();
-        usershipment.setUser(user);
-        usershipment.setAddress(optAddress.get());
+        usershipment.setUser(new UserViewModel(user));
+        usershipment.setAddress(new AddressViewModel(optAddress.get()));
 
         return usershipment;
     }

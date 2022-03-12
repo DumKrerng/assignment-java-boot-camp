@@ -12,14 +12,14 @@ public class UserController {
 
     @PostMapping("/api/v1/login")
     public ResponseLogin login(@RequestBody RequestLogin p_body) {
-        UserModel modelUser = m_userService.getUserByUsername(p_body.getUsername());
+        UserModel user = m_userService.getUserByUsername(p_body.getUsername());
 
-        boolean bolIsEqual = m_userService.isEqualPassword(modelUser, p_body.getPassword());
-        modelUser.setPassword("");
+        boolean bolIsEqual = m_userService.isEqualPassword(user, p_body.getPassword());
+        user.setPassword("");
         ResponseLogin response = new ResponseLogin();
 
         if(bolIsEqual) {
-            response.setData(modelUser);
+            response.setData(new UserViewModel(user));
 
         } else {
             response.setHttpStatus(HttpStatus.NOT_FOUND);
