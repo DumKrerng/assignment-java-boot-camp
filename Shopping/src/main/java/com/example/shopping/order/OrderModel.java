@@ -26,7 +26,7 @@ public class OrderModel {
 
 	@OneToOne
 	@JoinColumn(name = "payment_id")
-	private PaymentDetail payment;
+	private PaymentModel payment;
 
 	private String status = OrderStatus.Created.name();
 
@@ -64,11 +64,11 @@ public class OrderModel {
 		addressInvoice = p_addressInvoice;
 	}
 
-	public PaymentDetail getPayment() {
+	public PaymentModel getPayment() {
 		return payment;
 	}
 
-	public void setPayment(PaymentDetail p_payment) {
+	public void setPayment(PaymentModel p_payment) {
 		payment = p_payment;
 	}
 

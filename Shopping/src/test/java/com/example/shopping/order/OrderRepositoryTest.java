@@ -20,11 +20,9 @@ public class OrderRepositoryTest {
 	private UserRepository m_repoUser;
 
 	@Test
-	@DisplayName("ทดสอบการค้นด้วย UserName = \"DumKrerng\", Status = \"Paid\" แล้ว ต้องพบข้อมูล")
+	@DisplayName("ทดสอบการค้นด้วย UserId = \"TestID\", Status = \"Paid\" แล้ว ต้องพบข้อมูล")
 	void TestFindByUserIdAndStatus_01() {
-		String strUserName = "DumKrerng";
-		Optional<UserModel> optUser = m_repoUser.findByUsernameIs(strUserName);
-		String userId = optUser.get().getUserID();
+		String userId = "TestID";
 
 		String strStatus = OrderStatus.Paid.name();
 		Optional<List<OrderModel>> result = m_repoOrder.findByUserIdAndStatus(userId, strStatus);
@@ -34,11 +32,9 @@ public class OrderRepositoryTest {
 		assertEquals(1, lsOrders.size());
 	}
 	@Test
-	@DisplayName("ทดสอบการค้นด้วย UserName = \"DumKrerng\", Status = \"Created\" แล้ว ต้องพบไม่พบข้อมูล")
+	@DisplayName("ทดสอบการค้นด้วย UserName = \"TestID\", Status = \"Created\" แล้ว ต้องพบไม่พบข้อมูล")
 	void TestFindByUserIdAndStatus_02() {
-		String strUserName = "DumKrerng";
-		Optional<UserModel> optUser = m_repoUser.findByUsernameIs(strUserName);
-		String userId = optUser.get().getUserID();
+		String userId = "TestID";
 
 		String strStatus = OrderStatus.Created.name();
 		Optional<List<OrderModel>> result = m_repoOrder.findByUserIdAndStatus(userId, strStatus);

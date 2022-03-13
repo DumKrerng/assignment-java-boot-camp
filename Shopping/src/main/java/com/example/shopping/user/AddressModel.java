@@ -55,11 +55,11 @@ public class AddressModel {
 		return phoneNumber;
 	}
 
-	public void setPostcode(String p_postcode){
+	public void setPostCode(String p_postcode){
 		this.postcode = p_postcode;
 	}
 
-	public String getPostcode(){
+	public String getPostCode(){
 		return postcode;
 	}
 

@@ -129,7 +129,7 @@ class UserServiceTest {
         AddressModel mockAddress = new AddressModel();
         mockAddress.setUserID(strUserID);
         mockAddress.setAddressDetail("Test");
-        mockAddress.setPostcode("10000");
+        mockAddress.setPostCode("10000");
         when(m_repoAddress.findByUserIDIs(strUserID)).thenReturn(Optional.of(mockAddress));
 
         UserService service = new UserService();

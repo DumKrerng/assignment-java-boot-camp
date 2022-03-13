@@ -23,6 +23,7 @@ public class ShoppingApplication {
 	@PostConstruct
 	public void initialData() {
 		UserModel user = new UserModel();
+		user.setUserID("TestID");
 		user.setUsername("DumKrerng");
 		user.setName("DumKrerng");
 		user.setPassword("123456");
