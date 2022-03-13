@@ -21,4 +21,12 @@ public class OrderService {
 
 		return orderModel;
 	}
+
+	public OrderModel setOrderPaid(String p_orderId) {
+		OrderModel orderModel = m_repoOrder.getById(p_orderId);
+		orderModel.setStatus(OrderStatus.Paid);
+		orderModel = m_repoOrder.save(orderModel);
+
+		return orderModel;
+	}
 }

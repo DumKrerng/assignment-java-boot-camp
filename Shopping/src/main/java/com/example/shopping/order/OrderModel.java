@@ -76,6 +76,10 @@ public class OrderModel {
 		return status;
 	}
 
+	public OrderStatus getOrderStatus() {
+		return OrderStatus.getOrderStatus(status);
+	}
+
 	public void setStatus(String p_status) {
 		status = p_status;
 	}
