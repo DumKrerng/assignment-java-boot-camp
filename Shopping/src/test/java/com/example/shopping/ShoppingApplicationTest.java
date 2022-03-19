@@ -7,6 +7,7 @@ import com.example.shopping.payment.paymentmethod.*;
 import com.example.shopping.product.*;
 import com.example.shopping.user.*;
 import org.junit.jupiter.api.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.*;
 import org.springframework.boot.test.web.client.*;
@@ -20,12 +21,16 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ShoppingApplicationTest {
 
+	private static final Logger log = LoggerFactory.getLogger(ShoppingApplicationTest.class);
+
 	@Autowired
 	private TestRestTemplate m_template;
 
 	@Test
 	@DisplayName("ทดสอบ Success flow")
 	void testSuccessFlow() {
+		log.info("Start: Test success flow.");
+
 		RequestLogin request = new RequestLogin();
 		request.setUsername("DumKrerng");
 		request.setPassword("123456");
@@ -111,5 +116,7 @@ public class ShoppingApplicationTest {
 
 		assertEquals(HttpStatus.OK, httpstatus);
 		assertTrue(order.getInvoiceNumber().startsWith("INV"));
+
+		log.info("End: Test success flow.");
 	}
 }

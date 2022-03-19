@@ -6,6 +6,7 @@ import java.time.*;
 import java.time.format.*;
 import com.example.shopping.user.*;
 import com.example.shopping.utility.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
 import org.springframework.stereotype.*;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.*;
 @Service
 @Scope("singleton")
 public class OrderService {
+
+	private static final Logger log = LoggerFactory.getLogger(OrderService.class);
 
 	@Autowired
 	private OrderRepository m_repoOrder;
@@ -59,6 +62,8 @@ public class OrderService {
 
 	public OrderModel createOrder(RequestOrder p_order, String p_strUserId) {
 		try {
+			log.info("Create Order.");
+
 			UserModel user = m_repoUser.getById(p_strUserId);
 			OrderModel orderModel = p_order.toOrderModel(p_strUserId, user.getUserFullName());
 			orderModel.setOrderNumber(getNextOrderNumber());
@@ -73,6 +78,8 @@ public class OrderService {
 	}
 
 	public OrderModel setOrderPaid(String p_strOrderId, String p_strUserId) {
+		log.info("Set Order Paid.");
+
 		OrderModel orderModel = m_repoOrder.getById(p_strOrderId);
 
 		if(orderModel.getUserId().compareTo(p_strUserId) != 0) {
