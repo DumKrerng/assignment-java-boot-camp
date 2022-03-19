@@ -1,0 +1,42 @@
+{
+	UserId: string,
+	ShippingDetail: {
+		UserEmail: string
+		UserFullName: string
+		AddressDetail: string
+		Postcode: string
+		Province: string
+		District: string
+		SubDistrict: string
+		PhoneNumber: string
+	},
+	InvoiceDetail: {
+		UserCardID: string
+		UserFullName: string
+		AddressDetail: string
+		Postcode: string
+		Province: string
+		District: string
+		SubDistrict: string
+		PhoneNumber: string
+	},
+	PaymentDetail: {
+		PaymentMethodCode: CreditCard, Bank, PayPal, LINEPay
+		CreditCard: {
+			CreditCardNumber: string
+			CreditCardName: string
+			CreditCardExpire: string
+		}
+		Bank: {
+			SwiftCode: string
+			BankAccountNumber: string
+			BankAccountName: string
+		},
+		PayPal: {
+			UserEmail: string
+		},
+		LINEPay: {
+			AccountNumber: string
+		}
+	}
+}

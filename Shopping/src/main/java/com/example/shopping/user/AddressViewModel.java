@@ -16,7 +16,7 @@ public class AddressViewModel {
 		subDistrict = p_address.getSubDistrict();
 		district = p_address.getDistrict();
 		province = p_address.getProvince();
-		postcode = p_address.getPostcode();
+		postcode = p_address.getPostCode();
 		phoneNumber = p_address.getPhoneNumber();
 	}
 

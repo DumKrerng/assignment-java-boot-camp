@@ -1,8 +1,11 @@
 package com.example.shopping;
 
 import javax.annotation.*;
+import java.time.*;
+import com.example.shopping.order.*;
 import com.example.shopping.product.*;
 import com.example.shopping.user.*;
+import org.jetbrains.annotations.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
@@ -16,17 +19,31 @@ public class ShoppingApplication {
 	@Autowired
 	private ProductRepository m_repoProduct;
 
+	@Autowired
+	private OrderRepository m_repoOrder;
+
+	@VisibleForTesting
+	public static String UserId_ForTesting = "";
+	@VisibleForTesting
+	public static String UserFullName_ForTesting = "";
+
 	@PostConstruct
 	public void initialData() {
 		UserModel user = new UserModel();
+//		user.setUserID("TestID");
 		user.setUsername("DumKrerng");
 		user.setName("DumKrerng");
+		user.setUserFullName("DumKrerng DeeDee");
 		user.setPassword("123456");
 		m_repoUser.save(user);
+
+		UserId_ForTesting = user.getUserID();
+		UserFullName_ForTesting = user.getUserFullName();
 
 		user = new UserModel();
 		user.setUsername("DumKrerng-DD");
 		user.setName("DumKrerng-DD");
+		user.setUserFullName("DumKrerng-DD");
 		user.setPassword("123456");
 		m_repoUser.save(user);
 
@@ -49,6 +66,14 @@ public class ShoppingApplication {
 		product = new ProductModel("เสื้อX", "เสื้อX");
 		product.setUnitPrice(30.50);
 		m_repoProduct.save(product);
+
+		OrderModel order = new OrderModel();
+		order.setStatus(OrderStatus.Paid);
+		order.setUserId(UserId_ForTesting);
+		order.setOrderNumber("DD00010001");
+		order.setInvoiceNumber("INV00010001");
+		order.setTransactionDate(LocalDateTime.now());
+		m_repoOrder.save(order);
 	}
 
 	public static void main(String[] args) {

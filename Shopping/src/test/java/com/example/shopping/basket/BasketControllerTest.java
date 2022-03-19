@@ -5,7 +5,6 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import com.example.shopping.product.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.*;
@@ -20,30 +19,7 @@ class BasketControllerTest {
     private TestRestTemplate m_template;
 
     @Autowired
-    private ProductRepository m_repoProduct;
-
-    @Autowired
     private BasketRepository m_repoBasket;
-
-//    ProductModel product = new ProductModel("ProductX", "ProductX");
-//		product.setUnitPrice(10);
-//		m_repoProduct.save(product);
-//
-//    product = new ProductModel("ProductA", "ProductA");
-//		product.setUnitPrice(13);
-//		m_repoProduct.save(product);
-//
-//    product = new ProductModel("ProductCodeX", "ProductNameX");
-//		product.setUnitPrice(3);
-//		m_repoProduct.save(product);
-//
-//    product = new ProductModel("CodeX", "NameX");
-//		product.setUnitPrice(30);
-//		m_repoProduct.save(product);
-//
-//    product = new ProductModel("เสื้อX", "เสื้อX");
-//		product.setUnitPrice(30.50);
-//		m_repoProduct.save(product);
 
     @BeforeEach
     void deleteAllBasket() {
