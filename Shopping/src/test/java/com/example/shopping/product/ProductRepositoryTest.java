@@ -14,26 +14,6 @@ class ProductRepositoryTest {
     @Autowired
     private ProductRepository m_repository;
 
-//    ProductModel product = new ProductModel("ProductX", "ProductX");
-//		product.setUnitPrice(10);
-//		m_repoProduct.save(product);
-//
-//    product = new ProductModel("ProductA", "ProductA");
-//		product.setUnitPrice(13);
-//		m_repoProduct.save(product);
-//
-//    product = new ProductModel("ProductCodeX", "ProductNameX");
-//		product.setUnitPrice(3);
-//		m_repoProduct.save(product);
-//
-//    product = new ProductModel("CodeX", "NameX");
-//		product.setUnitPrice(30);
-//		m_repoProduct.save(product);
-//
-//    product = new ProductModel("เสื้อX", "เสื้อX");
-//		product.setUnitPrice(30.50);
-//		m_repoProduct.save(product);
-
     @Test
     @DisplayName("ทดสอบการค้นด้วย SearchValue = \"Product\" แล้ว ต้องพบข้อมูล Product 1 ตัว")
     void TestFindByProductCodeOrProductName_01() {

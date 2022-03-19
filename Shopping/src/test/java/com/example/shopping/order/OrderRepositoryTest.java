@@ -5,6 +5,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.example.shopping.user.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.autoconfigure.orm.jpa.*;
@@ -15,13 +16,25 @@ public class OrderRepositoryTest {
 	@Autowired
 	private OrderRepository m_repoOrder;
 
-	@Test
-	@DisplayName("ทดสอบการค้นด้วย UserId = \"TestID\", Status = \"Paid\" แล้ว ต้องพบข้อมูล")
-	void TestFindByUserIdAndStatus_01() {
-		String userId = "TestID";
+	@Autowired
+	private UserRepository m_repoUser;
 
+	private static String USERID = "";
+
+	private String getUserId() {
+		if(USERID.length() <= 0) {
+			Optional<UserModel> optUser = m_repoUser.findByUsernameIs("DumKrerng");
+			USERID = optUser.get().getUserID();
+		}
+
+		return USERID;
+	}
+
+	@Test
+	@DisplayName("ทดสอบการค้นด้วย UserId, Status = \"Paid\" แล้ว ต้องพบข้อมูล")
+	void TestFindByUserIdAndStatus_01() {
 		String strStatus = OrderStatus.Paid.name();
-		Optional<List<OrderModel>> result = m_repoOrder.findByUserIdAndStatus(userId, strStatus);
+		Optional<List<OrderModel>> result = m_repoOrder.findByUserIdAndStatus(getUserId(), strStatus);
 		List<OrderModel> lsOrders = result.get();
 
 		assertTrue(result.isPresent());
@@ -29,12 +42,10 @@ public class OrderRepositoryTest {
 	}
 
 	@Test
-	@DisplayName("ทดสอบการค้นด้วย UserName = \"TestID\", Status = \"Created\" แล้ว ต้องพบไม่พบข้อมูล")
+	@DisplayName("ทดสอบการค้นด้วย UserId, Status = \"Created\" แล้ว ต้องพบไม่พบข้อมูล")
 	void TestFindByUserIdAndStatus_02() {
-		String userId = "TestID";
-
 		String strStatus = OrderStatus.Created.name();
-		Optional<List<OrderModel>> result = m_repoOrder.findByUserIdAndStatus(userId, strStatus);
+		Optional<List<OrderModel>> result = m_repoOrder.findByUserIdAndStatus(getUserId(), strStatus);
 		List<OrderModel> lsOrders = result.get();
 
 		assertTrue(result.isPresent());

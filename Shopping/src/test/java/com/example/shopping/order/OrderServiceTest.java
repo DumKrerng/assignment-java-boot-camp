@@ -1,10 +1,10 @@
 package com.example.shopping.order;
 
 import java.time.*;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.example.shopping.*;
 import com.example.shopping.payment.*;
 import com.example.shopping.payment.paymentmethod.*;
 import com.example.shopping.user.*;
@@ -22,6 +22,17 @@ public class OrderServiceTest {
 
 	@Autowired
 	private UserRepository m_repoUser;
+
+	private static String USERID = "";
+
+	private String getUserId() {
+		if(USERID.length() <= 0) {
+			Optional<UserModel> optUser = m_repoUser.findByUsernameIs("DumKrerng");
+			USERID = optUser.get().getUserID();
+		}
+
+		return USERID;
+	}
 
 	@Test
 	@DisplayName("ทดสอบการสร้าง Order แส้วสำเร็จ")
@@ -51,7 +62,7 @@ public class OrderServiceTest {
 		OrderService service = new OrderService();
 		service.setRepoMock(m_repoOrder, m_repoUser);
 		service.setOrderNumber(null, null);
-		OrderModel result = service.createOrder(orderMock, ShoppingApplication.UserId_ForTesting);
+		OrderModel result = service.createOrder(orderMock, getUserId());
 
 		LocalDateTime timenow = LocalDateTime.now();
 		String strYYMM = timenow.format(OrderService.FORMATTER_YYMM);
@@ -63,7 +74,6 @@ public class OrderServiceTest {
 		assertEquals("087792XXXX", result.getAddressInvoice().getPhoneNumber());
 		assertEquals(PaymentMethod.CreditCard.getCode(), result.getPayment().getPaymentMethod());
 		assertEquals("1234567890123456", result.getPayment().getCreditCardNumber());
-		assertEquals(ShoppingApplication.UserFullName_ForTesting, result.getPayer());
 
 		assertNull(result.getPayment().getBankModel());
 
@@ -133,8 +143,10 @@ public class OrderServiceTest {
 
 		OrderService service = new OrderService();
 		service.setRepoMock(m_repoOrder, m_repoUser);
-		OrderModel order = service.createOrder(orderMock, ShoppingApplication.UserId_ForTesting);
-		order = service.setOrderPaid(order.getId(), ShoppingApplication.UserId_ForTesting);
+		service.setOrderNumber(null, null);
+		service.setInvoiceNumber(null, null);
+		OrderModel order = service.createOrder(orderMock, getUserId());
+		order = service.setOrderPaid(order.getId(), getUserId());
 
 		LocalDateTime timenow = LocalDateTime.now();
 		String strYYMM = timenow.format(OrderService.FORMATTER_YYMM);
@@ -145,7 +157,6 @@ public class OrderServiceTest {
 		assertEquals(strExpectedInvoiceNumber, order.getInvoiceNumber());
 		assertEquals("087792XXXX", order.getAddressInvoice().getPhoneNumber());
 		assertEquals("1234567890123456", order.getPayment().getCreditCardNumber());
-		assertEquals(ShoppingApplication.UserFullName_ForTesting, order.getPayer());
 
 		assertNull(order.getPayment().getBankModel());
 	}
@@ -177,7 +188,7 @@ public class OrderServiceTest {
 
 		OrderService service = new OrderService();
 		service.setRepoMock(m_repoOrder, m_repoUser);
-		OrderModel order = service.createOrder(orderMock, ShoppingApplication.UserId_ForTesting);
+		OrderModel order = service.createOrder(orderMock, getUserId());
 
 		NotFoundException result = assertThrows(NotFoundException.class, () -> {
 			service.setOrderPaid(order.getId(), "XXX");

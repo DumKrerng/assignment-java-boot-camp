@@ -3,6 +3,7 @@ package com.example.shopping.user;
 import java.util.*;
 import com.example.shopping.utility.*;
 import org.jetbrains.annotations.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
 import org.springframework.stereotype.*;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.*;
 @Service
 @Scope("singleton")
 public class UserService {
+
+    private static final Logger log = LoggerFactory.getLogger(UserService.class);
+//    private static final Logger log = LoggerFactory.getLogger("outbound-logs");
 
     @Autowired
     private UserRepository m_repoUser;
@@ -26,6 +30,8 @@ public class UserService {
     }
 
     public UserModel getUserByUsername(String p_strUsername) {
+        log.info("Find by Username: " + p_strUsername);
+
         Optional<UserModel> optUser = m_repoUser.findByUsernameIs(p_strUsername);
 
         if(optUser.isPresent()) {
@@ -46,6 +52,8 @@ public class UserService {
     }
 
     public UserShipment getUserShipment(String p_strUserID) {
+        log.info("Get UserShipment UserId: " + p_strUserID);
+
         UserModel user = getById(p_strUserID);
         if(null == user) {
             throw new NotFoundException(p_strUserID);

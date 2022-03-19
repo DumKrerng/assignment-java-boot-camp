@@ -3,6 +3,7 @@ package com.example.shopping.basket;
 import java.util.*;
 import com.example.shopping.product.*;
 import com.example.shopping.utility.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.*;
 @Service
 //@Scope("singleton")
 public class BasketService {
+
+    private static final Logger log = LoggerFactory.getLogger(BasketService.class);
 
     @Autowired
     private BasketRepository m_repoBasket;
@@ -24,6 +27,8 @@ public class BasketService {
 
     @Transactional
     public BasketModel getBasketIsOpen() {
+        log.info("Get Basket is Open.");
+
         Optional<BasketModel> optBasket = m_repoBasket.findByBasketStatus(BasketStatus.OPEN.name());
         if(!optBasket.isPresent()) {
             throw new NotFoundException("Basket Open");
@@ -36,6 +41,8 @@ public class BasketService {
 
     @Transactional
     public BasketModel addProduct(String p_strProductCode) {
+        log.info("Add Product, ProductCode: " + p_strProductCode);
+
         Optional<ProductModel> optProduct = m_repoProduct.findByProductCode(p_strProductCode);
         if(!optProduct.isPresent()) {
             throw new NotFoundException(p_strProductCode);
