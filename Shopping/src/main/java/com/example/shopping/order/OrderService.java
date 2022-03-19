@@ -72,8 +72,13 @@ public class OrderService {
 		}
 	}
 
-	public OrderModel setOrderPaid(String p_orderId) {
-		OrderModel orderModel = m_repoOrder.getById(p_orderId);
+	public OrderModel setOrderPaid(String p_strOrderId, String p_strUserId) {
+		OrderModel orderModel = m_repoOrder.getById(p_strOrderId);
+
+		if(orderModel.getUserId().compareTo(p_strUserId) != 0) {
+			throw new NotFoundException(p_strUserId);
+		}
+
 		orderModel.setStatus(OrderStatus.Paid);
 		orderModel.setInvoiceNumber(getNextInvoiceNumber());
 		orderModel = m_repoOrder.save(orderModel);

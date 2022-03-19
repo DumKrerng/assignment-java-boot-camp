@@ -107,8 +107,8 @@ public class OrderServiceTest {
 	}
 
 	@Test
-	@DisplayName("ทดสอบการ SetOrderPaid")
-	public void testSetOrderPaid() {
+	@DisplayName("ทดสอบการ SetOrderPaid แล้วสำเร็จ")
+	public void testSetOrderPaid_01() {
 		AddressModel addressShippingMock = new AddressModel();
 		addressShippingMock.setPostCode("10800");
 		addressShippingMock.setPhoneNumber("087792XXXX");
@@ -134,7 +134,7 @@ public class OrderServiceTest {
 		OrderService service = new OrderService();
 		service.setRepoMock(m_repoOrder, m_repoUser);
 		OrderModel order = service.createOrder(orderMock, ShoppingApplication.UserId_ForTesting);
-		order = service.setOrderPaid(order.getId());
+		order = service.setOrderPaid(order.getId(), ShoppingApplication.UserId_ForTesting);
 
 		LocalDateTime timenow = LocalDateTime.now();
 		String strYYMM = timenow.format(OrderService.FORMATTER_YYMM);
@@ -148,6 +148,42 @@ public class OrderServiceTest {
 		assertEquals(ShoppingApplication.UserFullName_ForTesting, order.getPayer());
 
 		assertNull(order.getPayment().getBankModel());
+	}
+
+	@Test
+	@DisplayName("ทดสอบการ SetOrderPaid แล้วมี Exception: ")
+	public void testSetOrderPaid_02() {
+		AddressModel addressShippingMock = new AddressModel();
+		addressShippingMock.setPostCode("10800");
+		addressShippingMock.setPhoneNumber("087792XXXX");
+
+		AddressModel addressInvoiceMock = new AddressModel();
+		addressInvoiceMock.setPostCode("10800");
+		addressInvoiceMock.setPhoneNumber("087792XXXX");
+
+		CreditCardModel creditCardMock = new CreditCardModel();
+		creditCardMock.setCreditCardNumber("1234567890123456");
+		creditCardMock.setCreditCardName("CreditCardName");
+		creditCardMock.setCreditCardExpire("12/25");
+
+		PaymentDetail paymentMock = new PaymentDetail();
+		paymentMock.setMethod(PaymentMethod.CreditCard);
+		paymentMock.setCreditCard(creditCardMock);
+
+		RequestOrder orderMock = new RequestOrder();
+		orderMock.setInvoiceDetail(addressInvoiceMock);
+		orderMock.setShippingDetail(addressShippingMock);
+		orderMock.setPaymentDetail(paymentMock);
+
+		OrderService service = new OrderService();
+		service.setRepoMock(m_repoOrder, m_repoUser);
+		OrderModel order = service.createOrder(orderMock, ShoppingApplication.UserId_ForTesting);
+
+		NotFoundException result = assertThrows(NotFoundException.class, () -> {
+			service.setOrderPaid(order.getId(), "XXX");
+		});
+
+		assertEquals(result.getMessage(), "XXX is not found!");
 	}
 
 	@Test

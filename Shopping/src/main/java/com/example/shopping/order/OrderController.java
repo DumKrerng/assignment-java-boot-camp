@@ -18,4 +18,14 @@ public class OrderController {
 
 		return response;
 	}
+
+	@PostMapping("/api/v1/order/paid/{p_orderId}")
+	public ResponseOrder setOrderPaid(@PathVariable String p_orderId, @RequestHeader("data-userid") String p_strUserId) {
+		OrderModel orderModel = m_service.setOrderPaid(p_orderId, p_strUserId);
+		OrderViewModel view = new OrderViewModel(orderModel);
+		ResponseOrder response = new ResponseOrder();
+		response.setData(view);
+
+		return response;
+	}
 }

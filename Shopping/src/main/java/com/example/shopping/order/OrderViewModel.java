@@ -4,6 +4,7 @@ import java.time.*;
 
 public class OrderViewModel {
 
+	private String orderId;
 	private String payer;
 	private String orderNumber;
 	private String invoiceNumber;
@@ -12,10 +13,15 @@ public class OrderViewModel {
 	public OrderViewModel() {}
 
 	public OrderViewModel(OrderModel p_order) {
+		orderId = p_order.getId();
 		payer = p_order.getPayer();
 		orderNumber = p_order.getOrderNumber();
 		invoiceNumber = p_order.getInvoiceNumber();
 		transactionDate = p_order.getTransactionDate();
+	}
+
+	public String getOrderId(){
+		return orderId;
 	}
 
 	public void setPayer(String p_payer){
