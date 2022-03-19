@@ -21,7 +21,7 @@ public class OrderControllerTest {
 
 	@Test
 	@DisplayName("ทดสอบการสร้าง Order สำเร็จ")
-	void TestCreateOrder_01() {
+	void testCreateOrder_01() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("data-userid", ShoppingApplication.UserId_ForTesting);
 
@@ -67,7 +67,7 @@ public class OrderControllerTest {
 
 	@Test
 	@DisplayName("ทดสอบการสร้าง Order ไม่สำเร็จ")
-	void TestCreateOrder_02() {
+	void testCreateOrder_02() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("data-userid", "XXX");
 
