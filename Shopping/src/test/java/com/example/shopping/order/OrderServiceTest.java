@@ -2,13 +2,13 @@ package com.example.shopping.order;
 
 import java.time.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.shopping.*;
 import com.example.shopping.payment.*;
 import com.example.shopping.payment.paymentmethod.*;
 import com.example.shopping.user.*;
+import com.example.shopping.utility.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.autoconfigure.orm.jpa.*;
@@ -24,8 +24,8 @@ public class OrderServiceTest {
 	private UserRepository m_repoUser;
 
 	@Test
-	@DisplayName("ทดสอบการสร้าง Order")
-	public void testCreateOrder() {
+	@DisplayName("ทดสอบการสร้าง Order แส้วสำเร็จ")
+	public void testCreateOrder_01() {
 		AddressModel addressShippingMock = new AddressModel();
 		addressShippingMock.setPostCode("10800");
 		addressShippingMock.setPhoneNumber("087792XXXX");
@@ -68,6 +68,42 @@ public class OrderServiceTest {
 		assertNull(result.getPayment().getBankModel());
 
 		m_repoOrder.deleteById(result.getId());
+	}
+
+	@Test
+	@DisplayName("ทดสอบการสร้าง Order แล้วมี Exception: NotFoundException")
+	public void testCreateOrder_02() {
+		AddressModel addressShippingMock = new AddressModel();
+		addressShippingMock.setPostCode("10800");
+		addressShippingMock.setPhoneNumber("087792XXXX");
+
+		AddressModel addressInvoiceMock = new AddressModel();
+		addressInvoiceMock.setPostCode("10800");
+		addressInvoiceMock.setPhoneNumber("087792XXXX");
+
+		CreditCardModel creditCardMock = new CreditCardModel();
+		creditCardMock.setCreditCardNumber("1234567890123456");
+		creditCardMock.setCreditCardName("CreditCardName");
+		creditCardMock.setCreditCardExpire("12/25");
+
+		PaymentDetail paymentMock = new PaymentDetail();
+		paymentMock.setMethod(PaymentMethod.CreditCard);
+		paymentMock.setCreditCard(creditCardMock);
+
+		RequestOrder orderMock = new RequestOrder();
+		orderMock.setInvoiceDetail(addressInvoiceMock);
+		orderMock.setShippingDetail(addressShippingMock);
+		orderMock.setPaymentDetail(paymentMock);
+
+		OrderService service = new OrderService();
+		service.setRepoMock(m_repoOrder, m_repoUser);
+		service.setOrderNumber(null, null);
+
+		NotFoundException error = assertThrows(NotFoundException.class, () -> {
+			service.createOrder(orderMock, "XXX");
+		});
+
+		assertEquals(error.getMessage(), "XXX is not found!");
 	}
 
 	@Test
