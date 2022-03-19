@@ -1,0 +1,6 @@
+{
+    "OrderNumber": "string"
+    "InvoiceNumber": "string"
+    "Payer": "string"
+    "TransactionDate": "datetime"
+}

@@ -1,10 +1,12 @@
 package com.example.shopping.order;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.*;
+import java.time.*;
 import com.example.shopping.payment.*;
 import com.example.shopping.user.*;
 import org.hibernate.annotations.*;
-import javax.persistence.*;
-import javax.persistence.Entity;
 
 @Entity
 public class OrderModel {
@@ -15,16 +17,20 @@ public class OrderModel {
 	private String id;
 
 	private String userId;
+	private String payer;
+	private String orderNumber;
+	private String invoiceNumber;
+	private LocalDateTime transactionDate;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_shipping_id")
 	private AddressModel addressShipping;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_invoice_id")
 	private AddressModel addressInvoice;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "payment_id")
 	private PaymentModel payment;
 
@@ -86,5 +92,37 @@ public class OrderModel {
 
 	public void setStatus(OrderStatus p_status) {
 		status = p_status.name();
+	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String p_orderNumber) {
+		orderNumber = p_orderNumber;
+	}
+
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+
+	public void setInvoiceNumber(String p_invoiceNumber) {
+		invoiceNumber = p_invoiceNumber;
+	}
+
+	public LocalDateTime getTransactionDate() {
+		return transactionDate;
+	}
+
+	public void setTransactionDate(LocalDateTime p_transactionDate) {
+		transactionDate = p_transactionDate;
+	}
+
+	public String getPayer() {
+		return payer;
+	}
+
+	public void setPayer(String p_payer) {
+		payer = p_payer;
 	}
 }
