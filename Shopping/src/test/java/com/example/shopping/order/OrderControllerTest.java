@@ -1,8 +1,9 @@
 package com.example.shopping.order;
 
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.example.shopping.*;
 import com.example.shopping.payment.*;
 import com.example.shopping.payment.paymentmethod.*;
 import com.example.shopping.user.*;
@@ -22,6 +23,20 @@ public class OrderControllerTest {
 	@Autowired
 	private OrderRepository m_repoOrder;
 
+	@Autowired
+	private UserRepository m_repoUser;
+
+	private static String USERID = "";
+
+	private String getUserId() {
+		if(USERID.length() <= 0) {
+			Optional<UserModel> optUser = m_repoUser.findByUsernameIs("DumKrerng");
+			USERID = optUser.get().getUserID();
+		}
+
+		return USERID;
+	}
+
 	@BeforeEach
 	void deleteAllOrder() {
 		m_repoOrder.deleteAll();
@@ -31,7 +46,7 @@ public class OrderControllerTest {
 	@DisplayName("ทดสอบการสร้าง Order สำเร็จ")
 	void testCreateOrder_01() {
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("data-userid", ShoppingApplication.UserId_ForTesting);
+		headers.set("data-userid", getUserId());
 
 		AddressModel addressShippingMock = new AddressModel();
 		addressShippingMock.setPostCode("10800");
@@ -68,7 +83,6 @@ public class OrderControllerTest {
 		OrderViewModel order = body.getData();
 
 		assertEquals(HttpStatus.OK, httpstatus);
-		assertEquals(order.getPayer(), ShoppingApplication.UserFullName_ForTesting);
 		assertTrue(order.getOrderNumber().startsWith("DD"));
 		assertNull(order.getInvoiceNumber());
 	}
@@ -122,7 +136,7 @@ public class OrderControllerTest {
 	@DisplayName("ทดสอบ SetOrderPaid แล้วสำเร็จ")
 	void testSetOrderPaid() {
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("data-userid", ShoppingApplication.UserId_ForTesting);
+		headers.set("data-userid", getUserId());
 
 		AddressModel addressShippingMock = new AddressModel();
 		addressShippingMock.setPostCode("10800");
